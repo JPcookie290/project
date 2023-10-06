@@ -1,8 +1,10 @@
-export default class Background {
+import { createElement } from "./function";
+
+class Background {
   constructor() {
     this.dirty = false;
     this.light = true;
-    //updateBackground();
+    this.createBackground();
   }
 
   changeLight() {
@@ -15,7 +17,12 @@ export default class Background {
     console.log(this.light);
   }
 
-  //renderBackground() {}
+  createBackground() {
+    createElement(null, "div", "bgInfo", "bgStyle");
+    createElement("bgInfo", "button", "createFood", "createFood");
+    createElement("bgInfo", "button", "lightOnOff", "lightOnOff");
+    createElement("bgInfo", "button", "cleanPet", "cleanPet");
+  }
 
   //updateBackground() {}
 }

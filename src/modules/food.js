@@ -1,7 +1,9 @@
-export default class Food {
+import { createElement } from "./function";
+
+class Food {
   constructor() {
     this.type = this.randomType();
-    //renderFood()
+    this.renderFood();
   }
 
   getType() {
@@ -26,7 +28,12 @@ export default class Food {
     }
   }
 
-  //renderFood() {  }
+  renderFood() {
+    createElement(null, "div", "foodChoice");
+    createElement("foodChoice", "button", "salty", "hidden");
+    createElement("foodChoice", "button", "bitter", "hidden");
+    createElement("foodChoice", "button", "salty", "hidden");
+  }
 }
 
 export { Food };

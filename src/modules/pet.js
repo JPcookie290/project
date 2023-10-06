@@ -1,3 +1,5 @@
+import { createElement } from "./function";
+
 class Pet {
   constructor(name) {
     this.name = name;
@@ -6,6 +8,7 @@ class Pet {
     this.clean = 10;
     this.foodlikes = this.randomPref();
     this.fooddislikes = this.randomPref();
+    this.renderPet();
   }
 
   getName() {
@@ -81,7 +84,9 @@ class Pet {
     this.clean = 10;
   }
 
-  //renderPet() {}
+  renderPet() {
+    createElement(null, "div", "pet", "petStyle");
+  }
 
   //updatePet() {}
 

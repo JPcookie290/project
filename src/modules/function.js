@@ -1,10 +1,11 @@
-/*------------------- createTag function ------------------- */
+/*------------------- createElement function ------------------- */
 
-function createTag(parent, type, id_name, class_name, content) {
+function createElement(parent, type, id_name, class_name, content) {
   const tag = document.createElement(type);
+  const parentElement = document.getElementById(parent);
 
   if (parent != null) {
-    parent.append(tag);
+    parentElement.append(tag);
   } else {
     const start = document.querySelector(".content");
     start.append(tag);
@@ -25,18 +26,4 @@ function createTag(parent, type, id_name, class_name, content) {
   return tag;
 }
 
-/*------------------- createMultiTag function ------------------- */
-
-function createMultiTags(parent, type, num, list) {
-  if (list != null) {
-    for (let i = 0; i < num; i++) {
-      createTag(parent, type, null, list[i].replace(/ /g, "_"), list[i]);
-    }
-  } else {
-    for (let i = 0; i < num; i++) {
-      createTag(parent, type);
-    }
-  }
-}
-
-export { createTag, createMultiTags };
+export { createElement };
