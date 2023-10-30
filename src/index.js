@@ -1,6 +1,6 @@
 "use strict";
 
-import "./style.css";
+import "./styleV2.css";
 import { Pet } from "./modules/pet";
 import { Background } from "./modules/background";
 import { Food } from "./modules/food";
@@ -15,10 +15,11 @@ function init() {
   console.log(pet1);
   let test = setInterval(function () {
     pet1.needsDecay(test);
-  }, 30000);
+    bg1.changeCleanliness(pet1.GetCleanStatus());
+  }, 3000);
 
-  const foodTest = new Food();
-  pet1.feeding(foodTest.getType());
+  //const foodTest = new Food();
+  //pet1.feeding(foodTest.getType());
 }
 
 init();

@@ -1,4 +1,6 @@
+import status from "statuses";
 import { createElement } from "./function";
+import { Pet } from "./pet";
 
 class Background {
   constructor() {
@@ -17,11 +19,24 @@ class Background {
     console.log(this.light);
   }
 
+  checkCleanliness(info) {
+    let status = info;
+    if (status <= 4) {
+      this.dirty = true;
+    }
+  }
+
+  changeCleanliness() {
+    const element = document.querySelector("#bgInfo");
+    if (this.dirty) {
+      element.classList.add("bgDirty");
+    } else {
+      element.classList.remove("bgDirty");
+    }
+  }
+
   createBackground() {
     createElement(null, "div", "bgInfo", "bgStyle");
-    createElement("bgInfo", "button", "createFood", "createFood");
-    createElement("bgInfo", "button", "lightOnOff", "lightOnOff");
-    createElement("bgInfo", "button", "cleanPet", "cleanPet");
   }
 
   //updateBackground() {}

@@ -3,7 +3,7 @@ import { createElement } from "./function";
 class Food {
   constructor() {
     this.type = this.randomType();
-    this.renderFood();
+    //this.renderFood();
   }
 
   getType() {
@@ -28,12 +28,9 @@ class Food {
     }
   }
 
-  renderFood() {
-    createElement(null, "div", "foodChoice");
-    createElement("foodChoice", "button", "salty", "hidden");
-    createElement("foodChoice", "button", "bitter", "hidden");
-    createElement("foodChoice", "button", "salty", "hidden");
-  }
+  /*renderFood() {
+    createElement(null, "button", this.type);
+  }*/
 }
 
 export { Food };

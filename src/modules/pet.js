@@ -1,4 +1,7 @@
 import { createElement } from "./function";
+import { Background } from "./background";
+import { Food } from "./food";
+import { test } from "media-typer";
 
 class Pet {
   constructor(name) {
@@ -6,8 +9,8 @@ class Pet {
     this.hunger = 10;
     this.sleep = 10;
     this.clean = 10;
-    this.foodlikes = this.randomPref();
-    this.fooddislikes = this.randomPref();
+    this.foodLikes = this.randomPref();
+    this.foodDislikes = this.randomPref();
     this.renderPet();
   }
 
@@ -15,18 +18,16 @@ class Pet {
     return this.name;
   }
 
+  GetCleanStatus() {
+    return this.clean;
+  }
+
   logPetInfo() {
-    console.log(
-      this.name,
-      this.foodPreference,
-      this.hunger,
-      this.sleep,
-      this.clean
-    );
+    console.log(this.name, this.hunger, this.sleep, this.clean);
   }
 
   checkLikes(num, pref) {
-    if (this.foodlikes != undefined && this.foodlikes == pref) {
+    if (this.foodLikes != undefined && this.foodLikes == pref) {
     }
   }
 
@@ -61,36 +62,122 @@ class Pet {
       console.log(
         `You failed to take care of ${this.getName()}, so it was taken away!`
       );
+    } else if (
+      (this.sleep <= 6 || this.clean <= 6 || this.hunger <= 6) &&
+      (this.sleep > 3 || this.clean > 3 || this.hunger > 3)
+    ) {
+      console.log("ok");
+      this.updatePet(0);
+    } else if (this.sleep <= 3 || this.clean <= 3 || this.hunger <= 3) {
+      console.log("needBad");
+      this.updatePet(1);
+    } else {
+      console.log("needGood");
+      this.updatePet(2);
     }
   }
 
   feeding(food) {
     console.log(this.hunger);
-    if (food == this.foodlikes) {
+    if (food == this.foodLikes) {
       this.hunger += 5;
-    } else if (food == this.fooddislikes) {
+    } else if (food == this.foodDislikes) {
       this.hunger += 1;
     } else {
       this.hunger += 3;
     }
-    console.log(food, this.foodlikes, this.fooddislikes, this.hunger);
+    console.log(food, this.foodLikes, this.foodDislikes, this.hunger);
   }
 
   sleeping() {
-    this.sleep += 1;
+    while (this.sleep < 10) {
+      this.sleep += 1;
+    }
+    this.logPetInfo();
   }
 
   cleaning() {
-    this.clean = 10;
+    this.clean += 5;
+    this.logPetInfo();
   }
 
   renderPet() {
-    createElement(null, "div", "pet", "petStyle");
+    const pet = createElement(null, "div", "pet", "petStyle");
+    pet.classList.add("needGood");
+    const btnStop = createElement(null, "button", "stopBtn", null, "Quit");
+
+    const btnFeed = createElement(
+      "bgInfo",
+      "button",
+      "createFood",
+      "createFood",
+      "Feed"
+    );
+    const btnLight = createElement(
+      "bgInfo",
+      "button",
+      "lightOnOff",
+      "lightOnOff",
+      "Light"
+    );
+    const btnClean = createElement(
+      "bgInfo",
+      "button",
+      "cleanPet",
+      "cleanPet",
+      "Clean"
+    );
+
+    // Buttons
+
+    btnClean.addEventListener("click", () => {
+      this.cleaning();
+    });
+
+    btnLight.addEventListener("click", () => {
+      this.sleeping();
+    });
+
+    btnFeed.addEventListener("click", () => {
+      const food = new Food();
+      console.log(food);
+      this.feeding(food);
+    });
+
+    btnStop.addEventListener("click", () => {
+      this.stop();
+    });
   }
 
-  //updatePet() {}
+  updatePet(need) {
+    const needs = ["needOk", "needBad", "needGood"];
+    const petElement = document.querySelector("#pet");
+    switch (need) {
+      case 0:
+        petElement.classList.add(needs[0]);
+        petElement.classList.remove(needs[1]);
+        petElement.classList.remove(needs[2]);
+        break;
+      case 1:
+        petElement.classList.add(needs[1]);
+        petElement.classList.remove(needs[0]);
+        petElement.classList.remove(needs[2]);
+        break;
+      case 2:
+        petElement.classList.add(needs[2]);
+        petElement.classList.remove(needs[0]);
+        petElement.classList.remove(needs[1]);
+        break;
+    }
+  }
 
-  //stop() {}
+  stop() {
+    this.sleep = 0.5;
+    this.hunger = 0.5;
+    this.clean = 0.5;
+    console.log(`You gave ${this.getName()} up...`);
+    return;
+  }
 }
 
 export { Pet };
