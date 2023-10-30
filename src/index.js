@@ -12,7 +12,7 @@ function init() {
   const bg1 = new Background();
 
   const pet1 = new Pet("Bo");
-  console.log(pet1);
+  //console.log(pet1);
   let test = setInterval(function () {
     pet1.needsDecay(test);
     bg1.changeCleanliness(pet1.GetCleanStatus());
