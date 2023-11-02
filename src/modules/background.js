@@ -1,13 +1,20 @@
 import status from "statuses";
-import { createElement } from "./function";
+import {
+  createElement,
+  createNeedsControl,
+  updateNeedsControl,
+} from "./function";
 import { Pet } from "./pet";
+
+/* -------------- Background Class -------------- */
 
 class Background {
   constructor() {
-    this.dirty = false;
     this.light = true;
     this.createBackground();
   }
+
+  /* -------------- Changes Light Status -------------- */
 
   changeLight() {
     console.log(this.light);
@@ -19,21 +26,27 @@ class Background {
     console.log(this.light);
   }
 
-  checkCleanliness(info) {
-    let status = info;
-    if (status <= 4) {
-      this.dirty = true;
+  /* -------------- Makes Environment "dirty" -------------- */
+
+  makeDirty(state) {
+    const element = document.querySelector("#bgInfo");
+    if (state <= 4 && !element.classList.contains("bgDirty")) {
+      console.log("BG is dirty");
+      element.classList.add("bgDirty");
     }
   }
 
-  changeCleanliness() {
+  /* -------------- Makes Environment "clean" -------------- */
+
+  makeClean(state) {
     const element = document.querySelector("#bgInfo");
-    if (this.dirty) {
-      element.classList.add("bgDirty");
-    } else {
+    if (state > 4 && element.classList.contains("bgDirty")) {
+      console.log("BG is clean");
       element.classList.remove("bgDirty");
     }
   }
+
+  /* -------------- Creates the Background -------------- */
 
   createBackground() {
     createElement(null, "div", "bgInfo", "bgStyle");

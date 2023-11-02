@@ -1,5 +1,6 @@
 import { createElement } from "./function";
 
+/* -------------- Food Item Class -------------- */
 class Food {
   constructor() {
     this.type = this.randomType();
@@ -10,21 +11,19 @@ class Food {
     return this.type;
   }
 
+  /* -------------- Random Food Type -------------- */
+
   randomType() {
     let num = Math.random();
-    let test;
     if (num < 0.33) {
-      console.log(num);
-      test = "sweet";
-      return test;
+      //console.log(num);
+      return "sweet";
     } else if (num > 0.33 && num < 0.66) {
-      console.log(num);
-      test = "salty";
-      return test;
+      //console.log(num);
+      return "salty";
     } else {
-      console.log(num);
-      test = "bitter";
-      return test;
+      //console.log(num);
+      return "spicy";
     }
   }
 

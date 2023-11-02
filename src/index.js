@@ -4,22 +4,21 @@ import "./styleV2.css";
 import { Pet } from "./modules/pet";
 import { Background } from "./modules/background";
 import { Food } from "./modules/food";
-import { createElement } from "./modules/function";
+import {
+  createElement,
+  createNeedsControl,
+  updateNeedsControl,
+} from "./modules/function";
+import { createStartPage } from "./modules/startPage";
 
 /*------------------- init function ------------------- */
 
 function init() {
-  const bg1 = new Background();
-
+  //const pet1 = createStartPage();
   const pet1 = new Pet("Bo");
-  //console.log(pet1);
   let test = setInterval(function () {
-    pet1.needsDecay(test);
-    bg1.changeCleanliness(pet1.GetCleanStatus());
+    pet1.needsAdjust(test);
   }, 3000);
-
-  //const foodTest = new Food();
-  //pet1.feeding(foodTest.getType());
 }
 
 init();
