@@ -17,11 +17,14 @@ class Background {
   /* -------------- Changes Light Status -------------- */
 
   changeLight() {
+    const element = document.querySelector(".overlay");
     console.log(this.light);
     if (this.light) {
       this.light = false;
+      element.classList.add("darken");
     } else {
       this.light = true;
+      element.classList.remove("darken");
     }
     console.log(this.light);
   }
@@ -51,8 +54,6 @@ class Background {
   createBackground() {
     createElement(null, "div", "bgInfo", "bgStyle");
   }
-
-  //updateBackground() {}
 }
 
 export { Background };

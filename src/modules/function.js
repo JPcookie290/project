@@ -30,7 +30,7 @@ function createElement(parent, type, id_name, class_name, content) {
 
 function createNeedsControl() {
   // not working!!!!!!!!
-  const needs = createElement(null, "div", "needs");
+  const needs = createElement(null, "div", "needs", "needs");
 
   // hunger display
   let hungerDis = document.createElement("div");
@@ -50,33 +50,30 @@ function createNeedsControl() {
   let energyDis = document.createElement("div");
   energyDis.innerHTML = `
               <h3>Energy:</h3>
-              <div id="ndHEnergy" class="needGood"></div>`;
+              <div id="ndEnergy" class="needGood"></div>`;
   needs.appendChild(energyDis);
 }
 
 /*------------------- updateNeedsControl function ------------------- */
 
-function updateNeedsControl(needStatus, needName) {
-  //const need = document.getElementById(needName); // implementation of createNeedsControl not working
-  switch (needStatus) {
-    case 0:
-      console.log("ok");
-      //need.classList.add("needOk");
-      //need.classList.remove("needBad");
-      //need.classList.remove("needGood");
-      break;
-    case 1:
-      console.log("bad");
-      //need.classList.add("needBad");
-      //need.classList.remove("needOk");
-      //need.classList.remove("needGood");
-      break;
-    case 2:
-      console.log("good");
-      //need.classList.add("needGood");
-      //need.classList.remove("needOk");
-      //need.classList.remove("needBad");
-      break;
+function updateNeedsControl(needStatus, needElement) {
+  const need = document.getElementById(needElement); // implementation of createNeedsControl not working
+
+  if (needStatus <= 6 && needStatus > 3) {
+    console.log("ok");
+    need.classList.add("needOk");
+    need.classList.remove("needBad");
+    need.classList.remove("needGood");
+  } else if (needStatus < 3) {
+    console.log("bad");
+    need.classList.add("needBad");
+    need.classList.remove("needOk");
+    need.classList.remove("needGood");
+  } else {
+    console.log("good");
+    need.classList.add("needGood");
+    need.classList.remove("needOk");
+    need.classList.remove("needBad");
   }
 }
 

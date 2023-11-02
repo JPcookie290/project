@@ -18,17 +18,32 @@ class Pet {
     this.sleep = 10;
     this.clean = 10;
     this.like = 0;
+    this.light = true;
     this.foodLikes = this.randomPref();
     this.foodDislikes = this.randomPref();
-    this.light = true;
     this.petBackGround = new Background();
     this.createPet();
   }
 
-  /* -------------- getName Function -------------- */
+  /* -------------- getName & setName Function -------------- */
 
   getName() {
     return this.name;
+  }
+
+  setName(name) {
+    this.name = this.name;
+    return this.name;
+  }
+
+  /* -------------- getSleep & setSleep Functions -------------- */
+
+  getSleep() {
+    return this.sleep;
+  }
+
+  setSleep(num) {
+    this.sleep = num;
   }
 
   /* -------------- logPetInfo Function -------------- */
@@ -87,6 +102,7 @@ class Pet {
 
     if (this.sleep == 0 || this.clean == 0 || this.hunger == 0) {
       clearInterval(test); //stops Interval
+      document.querySelector(".overlay").classList.add("darken");
       console.log(
         `You failed to take care of ${this.getName()}, so it was taken away!`
       );
@@ -95,9 +111,7 @@ class Pet {
       this.like += 0.2;
     }
 
-    updateNeedsControl(this.checkNeeds(this.sleep), "ndEnergy");
-    updateNeedsControl(this.checkNeeds(this.clean), "ndHygiene");
-    updateNeedsControl(this.checkNeeds(this.hunger), "ndHunger");
+    this.updateNeeds();
   }
 
   /* -------------- feeding Function -------------- */
@@ -115,13 +129,36 @@ class Pet {
   }
 
   /* -------------- sleeping Function -------------- */
+  /* ------------ interval not stopping ------------ */
 
-  sleeping() {
-    while (this.sleep < 10) {
-      this.sleep += 1;
+  sleeping(lightOff) {
+    console.log(this.sleep);
+    this.light = false;
+    let currentSleep = this.getSleep();
+    currentSleep += 1;
+    if (currentSleep >= 10) {
+      this.light = true;
+      this.sleep = 10;
+      console.log("true false sleep test", currentSleep);
+      clearInterval(lightOff);
     }
-    this.sleep = this.sleep > 10 ? 10 : this.sleep;
+
     this.logPetInfo();
+  }
+  /* -------------- petState Function -------------- */
+
+  petState() {
+    console.log("test1");
+    const pet = document.getElementById("pet");
+    if (!this.light) {
+      pet.classList.add("petAsleep");
+      pet.classList.remove("petStyle");
+      console.log("test2");
+    } else {
+      pet.classList.remove("petAsleep");
+      pet.classList.add("petStyle");
+      console.log("test3");
+    }
   }
 
   /* -------------- cleaning Function -------------- */
@@ -136,38 +173,39 @@ class Pet {
   /* --- creates Pet and uses createEnvironment() --- */
 
   createPet() {
-    const pet = createElement(null, "div", "pet", "petStyle");
     this.createEnvironment();
+    const pet = createElement("bgInfo", "div", "pet", "petStyle");
   }
 
   /* -------------- createEnvironment Function -------------- */
   /* ----- creates the Environment surrounding the pet ------ */
 
   createEnvironment() {
-    createNeedsControl();
-    const btnStop = createElement(null, "button", "stopBtn", null, "Quit");
-
+    createElement(null, "section", "needButtons", "needs");
     const btnFeed = createElement(
-      "bgInfo",
+      "needButtons",
       "button",
       "createFood",
-      "createFood",
-      "Feed"
+      "createFood"
     );
+
     const btnLight = createElement(
-      "bgInfo",
+      "needButtons",
       "button",
       "lightOnOff",
-      "lightOnOff",
-      "Light"
+      "lightOnOff"
     );
+
     const btnClean = createElement(
-      "bgInfo",
+      "needButtons",
       "button",
       "cleanPet",
-      "cleanPet",
-      "Clean"
+      "cleanPet"
     );
+
+    createNeedsControl();
+
+    const btnStop = createElement(null, "button", "stopBtn", null, "Quit");
 
     /* ------- Buttons ------- */
 
@@ -179,8 +217,7 @@ class Pet {
 
     btnLight.addEventListener("click", () => {
       // light button
-      this.sleeping();
-      this.petBackGround.changeLight();
+      let lightOff = setInterval(this.sleeping(), 3000, lightOff);
     });
 
     btnFeed.addEventListener("click", () => {
@@ -198,17 +235,13 @@ class Pet {
 
   /* -------------- checksNeeds Function -------------- */
 
-  checkNeeds(type) {
-    let status;
-    if (type <= 6 && type > 3) {
-      status = 0;
-    } else if (type < 3) {
-      status = 1;
-    } else {
-      status = 2;
-    }
-    return status;
+  updateNeeds() {
+    updateNeedsControl(this.hunger, "ndHunger");
+    updateNeedsControl(this.sleep, "ndEnergy");
+    updateNeedsControl(this.clean, "ndHygiene");
+    this.petBackGround.makeDirty(this.clean);
   }
+
   /* -------------- updatePet Function -------------- */
 
   updatePet(type) {
@@ -224,6 +257,10 @@ class Pet {
     this.clean = 0.5;
     console.log(`You gave ${this.getName()} up...`);
     return;
+  }
+
+  restart() {
+    window.reload();
   }
 }
 
