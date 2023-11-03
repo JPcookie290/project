@@ -14,8 +14,8 @@ import { createStartPage } from "./modules/startPage";
 /*------------------- init function ------------------- */
 
 function init() {
-  //const pet1 = createStartPage();
-  const pet1 = new Pet("Bo");
+  let petName = createStartPage();
+  const pet1 = new Pet();
   let test = setInterval(function () {
     pet1.needsAdjust(test);
   }, 3000);

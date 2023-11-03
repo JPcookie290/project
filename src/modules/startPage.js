@@ -8,7 +8,9 @@ import {
 } from "./function";
 
 function createStartPage() {
-  const heading = createElement(
+  const browserPet = createElement(null, "div", "browserPet", "browserPet");
+  browserPet.classList.add("hidden");
+  /*const heading = createElement(
     null,
     "h1",
     null,
@@ -16,7 +18,7 @@ function createStartPage() {
     "Choose a name for your pet:"
   );
   const petName = createElement(null, "input");
-  petName.setAttribute("type", "text");
+  petName.setAttribute("type", "text");*/
   const btnStart = createElement(
     null,
     "button",
@@ -24,18 +26,19 @@ function createStartPage() {
     null,
     "Let's Start!"
   );
+  const overlay = createElement(null, "div", null, "overlay");
 
   btnStart.addEventListener("click", () => {
-    let name = petName.value;
+    /*let name = petName.value;
     if (name === "") {
       name = "Bo";
     }
-    const pet = new Pet(name);
-    heading.innerText = `${pet.getName()}`;
-    petName.remove();
+    heading.innerText = `${name}`;
+    petName.remove();*/
     btnStart.remove();
+    browserPet.classList.remove("hidden");
 
-    return pet;
+    return name;
   });
 }
 

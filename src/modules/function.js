@@ -29,8 +29,7 @@ function createElement(parent, type, id_name, class_name, content) {
 /*------------------- createNeedControl function ------------------- */
 
 function createNeedsControl() {
-  // not working!!!!!!!!
-  const needs = createElement(null, "div", "needs", "needs");
+  const needs = createElement("browserPet", "div", "needs", "needs");
 
   // hunger display
   let hungerDis = document.createElement("div");

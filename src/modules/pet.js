@@ -12,8 +12,8 @@ import { test } from "media-typer";
 class Pet {
   /* -------------- Constructor -------------- */
 
-  constructor(name) {
-    this.name = name;
+  constructor() {
+    this.name = "Bo";
     this.hunger = 10;
     this.sleep = 10;
     this.clean = 10;
@@ -181,7 +181,7 @@ class Pet {
   /* ----- creates the Environment surrounding the pet ------ */
 
   createEnvironment() {
-    createElement(null, "section", "needButtons", "needs");
+    createElement("browserPet", "div", "needButtons", "needs");
     const btnFeed = createElement(
       "needButtons",
       "button",
@@ -256,11 +256,20 @@ class Pet {
     this.hunger = 0.5;
     this.clean = 0.5;
     console.log(`You gave ${this.getName()} up...`);
-    return;
+    const petDisplay = document.querySelector(".content");
+    petDisplay.innerHTML = "";
+    const restBtn = createElement(
+      null,
+      "button",
+      "restBtn",
+      "restBtn",
+      "Restart?"
+    );
+    restBtn.addEventListener("click", this.restart);
   }
 
   restart() {
-    window.reload();
+    location.reload();
   }
 }
 

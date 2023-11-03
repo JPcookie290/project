@@ -52,7 +52,7 @@ class Background {
   /* -------------- Creates the Background -------------- */
 
   createBackground() {
-    createElement(null, "div", "bgInfo", "bgStyle");
+    createElement("browserPet", "div", "bgInfo", "bgStyle");
   }
 }
 
