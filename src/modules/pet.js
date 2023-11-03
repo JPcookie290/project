@@ -65,7 +65,7 @@ class Pet {
   /* ---- stopping same foodLikes and foodDislikes --- */
 
   checkLikes(pref) {
-    if (this.foodLikes != undefined && this.foodLikes == pref) {
+    if (this.foodLikes == pref) {
       console.log("checklikes");
       this.randomPref();
     }
@@ -96,13 +96,13 @@ class Pet {
 
   needsAdjust(test) {
     this.hunger -= 0.5;
-    this.clean -= 0.5;
+    //this.clean -= 0.5;
     this.sleep -= 0.5;
     //this.logPetInfo();
 
     if (this.sleep == 0 || this.clean == 0 || this.hunger == 0) {
       clearInterval(test); //stops Interval
-      document.querySelector(".overlay").classList.add("darken");
+      //document.querySelector(".overlay").classList.add("darken");
       console.log(
         `You failed to take care of ${this.getName()}, so it was taken away!`
       );
@@ -217,7 +217,7 @@ class Pet {
 
     btnLight.addEventListener("click", () => {
       // light button
-      let lightOff = setInterval(this.sleeping(), 3000, lightOff);
+      //this.sleeping);
     });
 
     btnFeed.addEventListener("click", () => {
