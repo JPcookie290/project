@@ -96,8 +96,8 @@ class Pet {
 
   needsAdjust(test) {
     this.hunger -= 0.5;
-    //this.clean -= 0.5;
-    this.sleep -= 0.5;
+    this.clean -= 0.5;
+    //this.sleep -= 0.5;
     //this.logPetInfo();
 
     if (this.sleep == 0 || this.clean == 0 || this.hunger == 0) {
